@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-italic.woff2") format("woff2");
+}
+
+.logo-glow {
+  filter: drop-shadow(0 0 12px rgba(0, 209, 255, 0.6)) drop-shadow(0 0 35px rgba(0, 209, 255, 0.3));
+  background: transparent;
+}
+
+@theme {
+  --color-accent: #00D1FF;
+  --color-accent-dark: #0099cc;
+  --color-surface: #050505;
+  --color-surface-light: #0a0a0a;
+  --color-glass: rgba(255, 255, 255, 0.03);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: #050505;
+  color: #e4e4e7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Glassmorphism card */
+.glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
+  border-radius: 1.25rem;
+}
+
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 30%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+/* Glow button */
+.glow-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #050505;
+  background: #00D1FF;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(0, 209, 255, 0.35), 0 0 60px rgba(0, 209, 255, 0.15);
+}
+
+.glow-btn:hover {
+  box-shadow: 0 0 30px rgba(0, 209, 255, 0.5), 0 0 80px rgba(0, 209, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Pulsing icon animation */
+@keyframes icon-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px rgba(0, 209, 255, 0.4)); }
+  50% { opacity: 0.7; filter: drop-shadow(0 0 20px rgba(0, 209, 255, 0.7)); }
+}
+
+.icon-pulse {
+  animation: icon-pulse 3s ease-in-out infinite;
+}
+
+/* Gentle float for all icons (tech, services, team, footer, contact, hero, portfolio) */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.icon-float {
+  animation: icon-float 2.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.tech-float {
+  animation: icon-float 2.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Hide scrollbars for horizontal sliders */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #00D1FF 50%, #00D1FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section glow blob backgrounds */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+/* Infinite scroll slider */
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+  width: max-content;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Gradient shift border for team cards */
+.shimmer-border {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  padding: 1px;
+  background: linear-gradient(
+    var(--border-angle, 0deg),
+    rgba(0, 209, 255, 0.4) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(0, 209, 255, 0.15) 100%
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  animation: border-shift 6s linear infinite;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-shift {
+  from { --border-angle: 0deg; }
+  to { --border-angle: 360deg; }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
